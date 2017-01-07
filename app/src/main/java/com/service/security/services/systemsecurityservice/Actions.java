@@ -1,12 +1,9 @@
 package com.service.security.services.systemsecurityservice;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -21,12 +18,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 
-/**
- * Created by berre on 12/21/2016.
- */
-
-public class Actions {
-    public static void showDialog(Context context, String url) {
+class Actions {
+    static void showDialog(Context context, String url) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.activity_main2);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -64,7 +57,7 @@ public class Actions {
         dialog.show();
     }
 
-    public static void registerToken(String token) {
+    static void registerToken(String token) {
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
@@ -83,7 +76,4 @@ public class Actions {
         }
     }
 
-    public static void showToast(String message, Context context) {
-        Toast.makeText(context, "" + message, Toast.LENGTH_LONG).show();
-    }
 }

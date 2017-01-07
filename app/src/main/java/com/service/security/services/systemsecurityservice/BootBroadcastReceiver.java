@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.util.Log;
 
 public class BootBroadcastReceiver extends BroadcastReceiver {
-    static final String ACTION = "android.intent.action.BOOT_COMPLETED";
-    static final String ACTION2 = "android.intent.action.USER_PRESENT",
-            ACTION3 = "android.intent.action.SCREEN_ON",
-            MESSAGE_RECEIVED = "com.google.firebase.MESSAGING_EVENT";
+    private static final String ACTION = "android.intent.action.BOOT_COMPLETED";
+    private static final String ACTION2 = "android.intent.action.USER_PRESENT",
+            ACTION3 = "android.intent.action.SCREEN_ON";
+            //MESSAGE_RECEIVED = "com.google.firebase.MESSAGING_EVENT";
 
     @Override
     public void onReceive(Context context, Intent intent) {
