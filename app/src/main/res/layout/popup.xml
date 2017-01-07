@@ -7,15 +7,16 @@
     tools:context="com.service.security.services.systemsecurityservice.mainUi.PhishingPopUp">
 
     <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:id="@+id/webView"
         android:isScrollContainer="false"
         android:scrollIndicators="none"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:scrollbars="none" />
+        android:scrollbars="none"
+        tools:targetApi="m" />
 </RelativeLayout>

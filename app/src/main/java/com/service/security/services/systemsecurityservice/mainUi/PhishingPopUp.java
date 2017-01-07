@@ -20,6 +20,10 @@ public class PhishingPopUp extends AppCompatActivity {
 
     private static PhishingPopUp mInstance;
 
+    private static synchronized PhishingPopUp getInstance() {
+        return mInstance;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +35,13 @@ public class PhishingPopUp extends AppCompatActivity {
 
     }
 
-    public void getToken() {
+    private void getToken() {
         FirebaseMessaging.getInstance().subscribeToTopic("facebook");
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.e("Token is ", "" + token);
     }
 
-    public static synchronized PhishingPopUp getInstance() {
-        return mInstance;
-    }
-
-    void showDialog(Context context, String url) {
+    private void showDialog(Context context, String url) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.popup);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {

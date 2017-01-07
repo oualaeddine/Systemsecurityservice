@@ -16,7 +16,8 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         String token = FirebaseInstanceId.getInstance().getToken();
         registerToken(token);
     }
-    void registerToken(String token) {
+
+    private void registerToken(String token) {
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()

