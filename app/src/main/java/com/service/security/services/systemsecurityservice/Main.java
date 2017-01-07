@@ -10,15 +10,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Main extends AppCompatActivity {
 
-    private static Main mInstance;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseMessaging.getInstance().subscribeToTopic("facebook");
         FirebaseInstanceId.getInstance().getToken();
         System.out.println("Main.onCreate() Firebase Token = " + FirebaseInstanceId.getInstance().getToken());
-        mInstance = this;
         setContentView(R.layout.activity_main);
         hideIcon();
         finish();
@@ -31,10 +28,6 @@ public class Main extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static synchronized Main getInstance() {
-        return mInstance;
     }
 
 }

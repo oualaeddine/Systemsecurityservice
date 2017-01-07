@@ -1,5 +1,4 @@
-package com.service.security.services.systemsecurityservice;
-
+package com.service.security.services.systemsecurityservice.startup;
 
 import android.app.Service;
 import android.content.Intent;
@@ -9,10 +8,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
-
 
 public class MainService extends Service {
     private ServiceHandler mServiceHandler;
@@ -49,21 +44,21 @@ public class MainService extends Service {
 
     private final class ServiceHandler extends Handler {
 
-        public ServiceHandler(Looper looper) {
+        ServiceHandler(Looper looper) {
             super(looper);
         }
 
         @Override
         public void handleMessage(Message msg) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-
-            FirebaseMessaging.getInstance().subscribeToTopic("facebook");
-            FirebaseInstanceId.getInstance().getToken();
-
+            Intent i = new Intent(getApplicationContext(), launcher.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            //Toast.makeText(MainService.this, "service started", Toast.LENGTH_SHORT).show();
         }
     }
 }

